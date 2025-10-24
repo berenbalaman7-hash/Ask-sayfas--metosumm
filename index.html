@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gözlerimde Sen</title>
+    
+    <style>
+        /* GENEL VE ARKA PLAN STİLLERİ */
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+            min-height: 100vh;
+            padding: 20px 0;
+            box-sizing: border-box;
+
+            /* BLURLU KIRMIZI KALP ARKA PLANI */
+            background-color: #f7f7f7; 
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 100 100'%3E%3Ctext y='70' font-size='80' fill='%23ff6666' opacity='0.2'%3E%E2%99%A5%3C/text%3E%3C/svg%3E");
+            background-repeat: repeat;
+        }
+
+        /* ANA KAPSAYICI */
+        .main-container {
+            width: 95%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        /* ŞARKI MESAJI STİLİ */
+        .song-message {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #4a148c; /* Mor */
+            background-color: #ffe0f0; /* Açık pembe arka plan */
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 0px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* YENİ: ŞARKI YERLEŞTİRME ALANI STİLİ */
+        .song-embed-area {
+            width: 50%;
+            max-width: 50px;
+            margin: 0px auto;
+            padding: 0px;
+            background-color: #f0f8ff; /* Çok açık mavi */
+            border-radius: 0px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+        }
+        /* Şarkı Başlığı Stilini Güncelleme */
+        .song-embed-area p {
+             font-weight: 900; /* Daha kalın */
+             color: #6a1b9a; /* Koyu mor */
+             font-size: 1.2em;
+             margin-bottom: 15px;
+        }
+
+
+        /* 1. YAZI ANİMASYONU STİLLERİ */
+        #animated-greeting {
+            color: #d58eb2; 
+            font-size: 2.5em;
+            font-weight: 900;
+            margin-bottom: 5px; 
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: .15em solid #FF0000;
+            animation: 
+                typing 3.5s steps(35, end) forwards,
+                blink-caret .75s step-end infinite;
+            width: 0;
+            display: block; 
+        }
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #FF0000; }
+        }
+
+        /* METOŞUMM YAZISI STİLİ */
+        #metosumm {
+            font-size: 1.5em;
+            color: #8c6673; 
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+
+        /* 2. TANIŞMA SAYACI STİLLERİ */
+        .timer-title {
+             font-size: 1.2em; 
+             color: #777;
+             margin-bottom: 10px;
+        }
+        #tanisma-timer { 
+            font-size: 1.8em; 
+            color: #000000; 
+            font-weight: 900; 
+            letter-spacing: 1px;
+            padding: 15px 0; 
+            
+            border-radius: 10px; 
+            display: block;
+            margin-bottom: Opx;
+            background-color: #fdeff2; 
+        }
+
+        /* 3. FOTOĞRAF GALERİSİ ALTI ALTA STİLLERİ */
+        .alt-alta-galeri {
+            margin-top: 40px;
+            padding-top: 20px;
+        }
+        .alt-alta-galeri h3 {
+             color: #e91e63;
+             margin-bottom: 25px;
+        }
+        .photo-item {
+            margin-bottom: 30px;
+            padding: 15px;
+            
+            border-radius: 10px;
+        }
+        .photo-item img {
+            width: 100%;
+            height: auto;
+            max-width: 450px; 
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .photo-caption-bottom { 
+            color: #6a1b9a;
+            font-style: italic;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        .photo-text-area {
+            margin-top: 10px;
+            padding: 10px;
+            
+            background-color: #fff0f5; 
+            min-height: 40px; 
+            font-style: normal;
+        }
+        .photo-text-area strong { 
+            color: #FF0000; 
+        }
+
+        /* 4. ŞİİR STİLLERİ */
+        .siir-container {
+            width: 95%;
+            max-width: 800px;
+            margin-top: 30px;
+            text-align: center;
+            padding: 30px;
+            background-color: #fce4ec; 
+            border-radius: 10px;
+            line-height: 1.8;
+            color: #6a1b9a;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .siir-container .poem-title {
+            font-weight: bold; 
+            font-size: 1.4em;
+            color: #4a148c;
+            margin-bottom: 15px;
+        }
+        .siir-container .poem-text {
+            text-align: left;
+            white-space: pre-wrap;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        .siir-container .signature {
+             font-weight: bold;
+             text-align: right;
+             display: block;
+             margin-top: 10px;
+        }
+        
+/* ... Mevcut Tüm CSS Kodlarınız ... */
+/* ... (body, .main-container, .song-message, .song-embed-area vb.) ... */
+
+/* <-- TAM OLARAK BURAYA YAPIŞTIRIN --> */
+
+/* ========================================================= */
+/* MOBİL UYUMLULUK KURALLARI - Ekran 600 pikselden dar olunca devreye girer */
+/* ========================================================= */
+@media screen and (max-width: 600px) {
+    
+    body {
+        padding: 10px;
+    }
+
+    .main-container {
+        width: 100%; 
+        border-radius: 0;
+    }
+    
+    h1 {
+        font-size: 2em; 
+        text-align: center;
+    }
+    
+    /* ... Diğer mobil kuralları ... */
+}
+
+/* ---------------------------------- */
+
+</style>
+    </style>
+</head>
+
+<body>
+
+    <div class="main-container">
+        
+        <div id="animated-greeting">SENİ ÇOK SEVİYORUMM SEVGİLİMMM
+        </div>
+        
+        <p id="metosumm">METOŞUMM🩷🥰</p>
+        
+        <p class="timer-title">Ömrümün sana ait olduğu o günden beri...</p>
+        <h2 id="tanisma-timer">Zaman hesaplanıyor...</h2>
+        
+        <hr style="border: 0; border-top: 1px solid #eee; margin-bottom: 40px;">
+
+        <div class="song-message">
+            Bu şarkıyı bizim için seçiyorum🤍
+            Kabul olan tek duamsın sevgilim.
+            Bu zamana kadar başıma gelen en güzel hediyesin, nasibimsin.
+            İlk günkü kadar çok seviyorum seni…
+            Her geçen gün daha da aşık oluyorum.
+            Her şeyimsin, iyi ki varsın. 💫❤️
+        </div>
+
+        <div class="song-embed-area">  </div>
+            
+            
+            <iframe src="" frameborder="0"></iframe> <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/36oBlwSPNtA48TLYqk4SNp?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe> </iframe>
+            
+        </div>
+        
+        <div class="alt-alta-galeri">
+            <h3>ANILARIMIZZ🥺🤍</h3>
+
+            <div class="photo-item">
+                <img src="bebeğim.jpeg" alt="Aşk Fotoğrafı 1"> 
+                <p class="photo-caption-bottom"> ❤️ </p>
+                <div class="photo-text-area">
+                    Bu birlikte çekildiğimiz ilk fotoğraf ve her baktığımda o anı yeniden yaşıyorum.
+                </div>
+            </div>
+
+            <div class="photo-item">
+                 <img src="metoş.jpeg" alt="Aşk Fotoğrafı 2"> 
+                <div class="photo-text-area">  
+                   Beraber geçirdiğimiz ilk doğum günün, o gün sanki ben de seninle doğmuş gibiydim sevgilimm. .
+                </div>
+            </div>
+
+            <div class="photo-item">
+                 <img src="metoo.jpeg" alt="Aşk Fotoğrafı 3"> 
+                <div class="photo-text-area">
+                   sana sarıldığım her an evrendeki tüm sesler susuyo gibi...
+                </div>
+            </div>
+            
+            <div class="photo-item">
+                 <img src="balım.jpeg" alt="Aşk Fotoğrafı 4"> 
+                <div class="photo-text-area">
+                    gülüşüne ömrümü verecek kadar çok seviyorum kurban olduğumm🤍🥰.
+                </div>
+            </div>
+
+            <div class="photo-item">
+                 <img src="ilk.jpeg" alt="Aşk Fotoğrafı 5"> 
+                <div class="photo-text-area">
+                    🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍🤍
+                </div>
+            </div>
+
+            <div class="photo-item">
+                 <img src="yüzük.jpeg"Aşk Fotoğrafı 6"> 
+                <div class="photo-text-area">
+                    Kendi aramızda taktığımız söz yüzüğümüzz içimin kıpır kıpır olduğu Tarih:24.07.2025
+                </div>
+            </div>
+
+            <div class="photo-item">
+                 <img src="DOGUM.jpeg" alt="Aşk Fotoğrafı 7"> 
+                <div class="photo-text-area">
+                Hayatımda geçirdiğim en güzel günlerden birisiydi .İyiki doğdum dediğim gün.Pastam hep senin ellinden olsun sevgilimm.
+                </div>
+            </div>
+
+            <div class="photo-item">
+                 <img src="SABAH.jpeg"Aşk Fotoğrafı 8"> 
+                <div class="photo-text-area">
+                Sırf beni görmek için gece dışarıda sabahlayıp, sabahın dördü beşinde beni işe bıraktığın günler.Asla unutamayağım duygular yaşattın sevgilim iyikiii sen en değerlimm🥺🥺🥺🥺🤍
+                </div>
+            </div>
+
+            <div class="photo-item">
+                 <img src="cocuk.jpeg" alt="Aşk Fotoğrafı 9"> 
+                <div class="photo-text-area">
+                      Tüm şımarıklarıma katlanan beni asla üzmeyen canım sevgilim.Beraber çoçuklaşıp beraber gülüyoruz.Yüzümü tek güldüren biricik sevgilimm 🥺🤍
+                </div>
+            </div>
+
+            <div class="photo-item">
+                 <img src="KOCAM.jpeg" alt="Aşk Fotoğrafı 10"> 
+                <div class="photo-text-area">
+                Son olarak günlerdir bakmaya doyamadığımız fotoğrafımız🥺🤍.Gülüşüne kurban olduğum.Nefes aldığım sürece sonsuza dek seni çok seveceğimm ,hep seninim,hep benim....🤍
+                </div>
+            </div>
+
+            
+            <p style="margin-top: 50px; color: #FF0000; font-weight: bold;"></p>
+
+        </div>
+    </div> 
+
+    <div class="siir-container">
+        <p class="poem-title">Gözlerimde Sen</p>
+        <div class="poem-text">
+            Senden öncem mi diyeyim,
+            Senden öncem yok ki…
+            Hayatımı hayat yapan sensin,
+            Beni ben yapan sen.
+
+            Ölüm korkuturdu ya beni,
+            Sensizliğin yanında ne ki?
+            Hayat verdin bana,
+            Gecemi gündüze çevirdin,
+            Hüznümü neşeye…
+
+            Sevmek varmış yüreğimde,
+            Aşk varmış kalbimde.
+            Seni görünce anladım ki,
+            Senmişsin hepsiyle.
+
+            Senden öncem yokmuş gibi,
+            Sen varken nefes almak gibi…
+            Ömrüme ömür kattın,
+            Bir gülüşüne yenilmek gibi.
+
+            Ve bil ki,
+            Ömrümün en güzel yeri sensin.
+            Gözlerim, sadece seni gördüğünde tamam,
+            Kalbim, sadece seninle atınca huzurda…
+        </div>
+        <span class="signature">Sevgilime ilk şiirim</span>
+        <span class="signature">Beren Altun</span>
+    </div>
+
+    <script>
+        // *** TANIŞMA SÜRESİ SAYACI (Count-up) ***
+        // LÜTFEN AŞAĞIDAKİ TANIŞMA TARİHİNİZİ DÜZENLEYİN
+        // Örnek: 26 Şubat 2025 gece 00:00:00 için -> new Date(2025, 1, 26, 0, 0, 0).getTime();
+        const tanismaTarihi = new Date(2025, 1, 26, 0, 0, 0).getTime(); 
+
+        const tanismaSureSayaci = setInterval(function() {
+            const simdi = new Date().getTime();
+            const fark = simdi - tanismaTarihi;
+            
+            if (fark < 0) {
+                 document.getElementById("tanisma-timer").innerHTML = "Büyük gün bekleniyor... (" + new Date(tanismaTarihi).toLocaleDateString() + ")";
+                 return;
+            }
+
+            const gunler = Math.floor(fark / (1000 * 60 * 60 * 24));
+            const saatler = Math.floor((fark % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const dakikalar = Math.floor((fark % (1000 * 60 * 60)) / (1000 * 60));
+            const saniyeler = Math.floor((fark % (1000 * 60)) / 1000);
+
+            // Geri Sayım Kalpli ve Güncel Hali
+            document.getElementById("tanisma-timer").innerHTML = 
+                (gunler < 10 ? "0" : "") + gunler + " GÜN  : " + 
+                (saatler < 10 ? "0" : "") + saatler + " SAAT  : " + 
+                (dakikalar < 10 ? "0" : "") + dakikalar + " DAKİKA  : " + 
+                (saniyeler < 10 ? "0" : "") + saniyeler + " SANİYE ";
+
+        }, 1000); 
+    </script>
+
+</body>
+</html>
